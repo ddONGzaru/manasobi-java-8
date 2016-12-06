@@ -1,0 +1,1 @@
+# manasobi-java-8
