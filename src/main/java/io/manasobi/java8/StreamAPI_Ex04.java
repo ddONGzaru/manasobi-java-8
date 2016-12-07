@@ -61,6 +61,12 @@ public class StreamAPI_Ex04 {
                   .findFirst()
         );
 
+        System.out.println(
+            Stream.of(1, 2, 3, 4, 5)
+                  .filter(i -> i > 3)
+                  .count()
+        );
+
     }
 
 
