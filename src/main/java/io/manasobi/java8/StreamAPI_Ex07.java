@@ -14,7 +14,7 @@ public class StreamAPI_Ex07 {
 
         final int[] sum = { 0 };
 
-        IntStream.range(0, 100)
+        /*IntStream.range(0, 100)
                  .forEach(i -> sum[0] += i);
 
         System.out.println("                                 sum: " + sum[0]);
@@ -35,9 +35,9 @@ public class StreamAPI_Ex07 {
             IntStream.range(0, 100)
                      .parallel()
                      .sum()
-        );
+        );*/
 
-        final long start = System.currentTimeMillis();
+        /*final long start = System.currentTimeMillis();
 
         Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8)
               .stream()
@@ -51,7 +51,9 @@ public class StreamAPI_Ex07 {
               })
               .forEach(i -> System.out.println(i));
 
-        System.out.println("Stream: " + (System.currentTimeMillis() - start));
+        System.out.println("Stream: " + (System.currentTimeMillis() - start));*/
+
+        System.setProperty("java.util.concurrent.ForkJoinPool.common.parallelism", "7");  //0: core 1, 1: core 2, 3: core 4, 7: core 8
 
         final long start2 = System.currentTimeMillis();
 
