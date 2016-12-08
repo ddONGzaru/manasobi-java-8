@@ -10,6 +10,7 @@ import java.util.OptionalInt;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -61,14 +62,14 @@ public class Stream_int {
 
     // iterate
     @Test
-    @Ignore
     public void intstream_iterate() {
 
-        List<Integer> numbers = IntStream.iterate(0, n -> n + 3).limit(3)
-                .boxed().collect(Collectors.toList());
+        List<Integer> numbers = IntStream.iterate(0, n -> n + 3)
+                                         .limit(3)
+                                         .boxed()
+                                         .collect(Collectors.toList());
 
-        /*assertThat(numbers,
-                contains(new Integer(0), new Integer(3), new Integer(6)));*/
+        assertThat(numbers).contains(new Integer(0), new Integer(3), new Integer(6));
     }
 
     // of
@@ -82,27 +83,24 @@ public class Stream_int {
 
     // range
     @Test
-    @Ignore
     public void intstream_range() {
 
         List<Integer> numbers = IntStream.range(1, 3)
                                          .boxed()
                                          .collect(Collectors.toList());
 
-        /*assertThat(numbers, contains(new Integer(1), new Integer(2)));*/
+        assertThat(numbers).contains(new Integer(1), new Integer(2));
     }
 
     // rangeClosed
     @Test
-    @Ignore
     public void intstream_rangeClosed() {
 
         List<Integer> numbers = IntStream.rangeClosed(1, 3)
                                          .boxed()
                                          .collect(Collectors.toList());
 
-        /*assertThat(numbers,
-                contains(new Integer(1), new Integer(2), new Integer(3)));*/
+        assertThat(numbers).contains(new Integer(1), new Integer(2), new Integer(3));
     }
 
     // Map to IntStream
@@ -123,7 +121,6 @@ public class Stream_int {
 
     // Convert to stream of objects
     @Test
-    @Ignore
     public void convert_to_stream_of_objects() {
 
         int[] numbers = { 1, 2, 3, 4, 5, 6 };
@@ -132,10 +129,7 @@ public class Stream_int {
                                             .boxed()
                                             .collect(Collectors.toList());
 
-        /*assertThat(
-                listOfInteger,
-                contains(new Integer(1), new Integer(2), new Integer(3),
-                        new Integer(4), new Integer(5), new Integer(6)));*/
+        assertThat(listOfInteger).contains(new Integer(1), new Integer(2), new Integer(3), new Integer(4), new Integer(5), new Integer(6));
     }
 
     // Specify default

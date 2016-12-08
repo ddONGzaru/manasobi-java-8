@@ -53,21 +53,24 @@ public class Stream_double {
     @Test
     public void doublestream_generate() {
 
-        OptionalDouble one = DoubleStream.generate(() -> 1).limit(10)
-                .distinct().findFirst();
+        OptionalDouble one = DoubleStream.generate(() -> 1)
+                                         .limit(10)
+                                         .distinct()
+                                         .findFirst();
 
         assertEquals(1, one.getAsDouble(), 0);
     }
 
     // iterate
     @Test
-    @Ignore
     public void doublestream_iterate() {
 
-        List<Double> numbers = DoubleStream.iterate(0, n -> n + 3).limit(3)
-                .boxed().collect(Collectors.toList());
+        List<Double> numbers = DoubleStream.iterate(0, n -> n + 3)
+                                           .limit(3)
+                                           .boxed()
+                                           .collect(Collectors.toList());
 
-        //assertThat(numbers, contains(new Double(0), new Double(3), new Double(6)));
+        assertThat(numbers).contains(new Double(0), new Double(3), new Double(6));
     }
 
     // of
@@ -97,19 +100,15 @@ public class Stream_double {
 
     // Convert to stream of objects
     @Test
-    @Ignore
     public void convert_to_stream_of_objects() {
 
         double[] numbers = { 1, 2, 3, 4, 5, 6 };
 
-        List<Double> listOfDoubles = Arrays.stream(numbers).boxed()
-                .collect(Collectors.toList());
+        List<Double> listOfDoubles = Arrays.stream(numbers)
+                                           .boxed()
+                                           .collect(Collectors.toList());
 
-        /*assertThat(
-                listOfDoubles,
-                contains(new Double(1), new Double(2), new Double(3),
-                        new Double(4), new Double(5), new Double(6)));*/
-
+        assertThat(listOfDoubles).contains(new Double(1), new Double(2), new Double(3), new Double(4), new Double(5), new Double(6));
     }
 
     // Specify default
@@ -119,7 +118,9 @@ public class Stream_double {
         List<String> doubles = new ArrayList<>();
 
         double optionalDouble = doubles.stream()
-                .mapToDouble(Double::parseDouble).max().orElse(5);
+                                       .mapToDouble(Double::parseDouble)
+                                       .max()
+                                       .orElse(5);
 
         assertEquals(5, optionalDouble, 0);
     }

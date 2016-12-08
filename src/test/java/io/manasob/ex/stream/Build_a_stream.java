@@ -89,6 +89,4 @@ public class Build_a_stream {
         Stream.generate(Math::random).limit(10).forEach(System.out::println);
     }
 
-
-
 }
