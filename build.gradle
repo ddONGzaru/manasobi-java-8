@@ -29,7 +29,7 @@ dependencies {
 
     compile 'ch.qos.logback:logback-classic:1.1.7'
     compile 'com.google.guava:guava:20.0'
-
+    compile 'one.util:streamex:0.6.3'
 
     provided 'org.projectlombok:lombok:1.16.10'
 
