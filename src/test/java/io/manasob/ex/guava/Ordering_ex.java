@@ -1,16 +1,21 @@
 package io.manasob.ex.guava;
 
+import com.google.common.base.Function;
 import com.google.common.collect.Ordering;
 import com.google.common.primitives.Ints;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.util.Lists;
 import org.junit.Test;
 
 import java.util.*;
 
+import static java.util.Comparator.comparing;
 import static java.util.Comparator.comparingInt;
 import static java.util.Comparator.reverseOrder;
-import static org.junit.Assert.assertEquals;
+import static java.util.stream.Collectors.toList;
+import static org.junit.Assert.*;
 
 /**
  * Created by tw.jang on 2016-12-08.
@@ -177,6 +182,96 @@ public class Ordering_ex {
 
         assertEquals(Integer.valueOf(99), result.get());
     }
+
+    // Numbers ordered
+    @Test
+    public void is_list_of_numbers_sorted_in_java_with_guava () {
+
+        List<Integer> uwConferenceTitles = Lists.newArrayList(
+                1896, 1897, 1901, 1906, 1912,
+                1952, 1959, 1962, 1993, 1998,
+                1999, 2010, 2011, 2012);
+
+        boolean isSorted = Ordering.natural()
+                                   .isOrdered(uwConferenceTitles);
+
+        assertTrue(isSorted);
+    }
+
+    // Strings ordered
+    @Test
+    public void is_list_of_strings_sorted_in_java_with_guava () {
+
+        List<String> secConferenceEast = Lists.newArrayList("Florida", "Georgia", "Missouri", "South Carolina", "Tennessee", "Vanderbilt");
+
+        boolean isSorted = Ordering.natural()
+                                   .isOrdered(secConferenceEast);
+
+        assertTrue(isSorted);
+    }
+
+    // Strings ordered case insensitive
+    @Test
+    public void is_list_of_strings_sorted_case_insensitive_in_java_with_guava () {
+
+        List<String> secConferenceEast = Lists.newArrayList(
+                "alabama",
+                "Alabama",
+                "ALABAMA");
+
+        boolean isSorted = Ordering.from(String.CASE_INSENSITIVE_ORDER)
+                                   .isOrdered(secConferenceEast);
+
+        assertTrue(isSorted);
+    }
+
+    // Order by object field
+    @Data
+    @AllArgsConstructor
+    class GlassWare {
+        private String name;
+        private String description;
+    }
+
+    @Test
+    public void order_by_object_field () {
+
+        List<GlassWare> beerGlasses = Lists.newArrayList(
+            new GlassWare("Flute Glass", "Enhances and showcases..."),
+            new GlassWare("Pilsner Glass (or Pokal)", "showcases color, ..."),
+            new GlassWare("Pint Glass", "cheap to make..."),
+            new GlassWare("Goblet (or Chalice)", "Eye candy..."),
+            new GlassWare("Mug (or Seidel, Stein)", "Easy to drink...")/*,
+            new GlassWare(null, null)*/
+        );
+
+        /*Ordering<GlassWare> byGlassWareName = Ordering.natural().nullsFirst()
+                .onResultOf(new Function<GlassWare, String>() {
+                    public String apply(GlassWare glassWare) {
+                        return glassWare.getName();
+                    }
+                });
+
+        GlassWare firstBeerGlass = byGlassWareName.min(beerGlasses);
+
+        // first element will be null
+        assertNull(firstBeerGlass.getName());
+
+        GlassWare lastBeerGlass = byGlassWareName.max(beerGlasses);
+        assertEquals("Pint Glass", lastBeerGlass.getName());*/
+
+
+        beerGlasses.stream()
+                .sorted(comparing(GlassWare::getName))
+                .forEach(System.out::println);
+
+        beerGlasses.stream()
+                .sorted(comparing(GlassWare::getName).reversed())
+                .forEach(System.out::println);
+    }
+
+
+
 
 
 }
