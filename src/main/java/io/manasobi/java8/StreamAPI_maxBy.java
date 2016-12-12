@@ -40,11 +40,11 @@ public class StreamAPI_maxBy {
         */
 
         final List<Student> resultList = students.stream()
-                                              .collect(groupingBy(Student::getCity, maxBy(comparing(Student::getAge))))
-                                              .values()
-                                              .stream()
-                                              .map(Optional::get)
-                                              .collect(toList());
+                                                  .collect(groupingBy(Student::getCity, maxBy(comparing(Student::getAge))))
+                                                  .values()
+                                                  .stream()
+                                                  .map(Optional::get)
+                                                  .collect(toList());
         System.out.println(resultList);
 
         final List<Student> resultList2 = students.stream()
